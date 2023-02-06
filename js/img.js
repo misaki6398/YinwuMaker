@@ -12,6 +12,7 @@ var horizontalBorderLimit = 0; //水平邊界
 var verticalBorderLimit = 0; //垂直邊界
 var imageScale = 1;
 var canvas = new fabric.Canvas('canvas');
+var tempPicture;
 
 console.log("canvasSize:" + canvasSize);
 
@@ -43,9 +44,15 @@ $(document).ready(function () {
             alert("Please choose an image < 2MB.");
             return;
         } else {
-            InitialParam();
-            importPicToCanvas(e.target.files[0], canvas);
+            initialParam();
+            tempPicture = e.target.files[0];
+            importPicToCanvas(tempPicture, canvas);
         }
+    });
+
+    $('#copy-object').click(function () {
+        initialParam();
+        importPicToCanvas(tempPicture, canvas);
     });
 
     // 上傳照片============================================
@@ -236,7 +243,7 @@ function importPicToCanvas(target, canvas) {
 
 
 
-function InitialParam() {
+function initialParam() {
     isPictureHeight = false, isPictureWidth = false;
     extendPixel = 0;
     horizontalBorderLimit = 0; //水平邊界
